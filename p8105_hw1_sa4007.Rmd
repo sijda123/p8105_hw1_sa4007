@@ -1,16 +1,16 @@
 ---
 title: "P8105 HW1"
 author: "Sijda Ahmed (sa4007)"
-date: "2025-09-18"
 output: github_document
 ---
 
 ```{r}
 # load in necessary packages
 library(moderndive)
-library(tidyverse)
 library(nycflights13)
 library(ggplot2)
+library(tidyverse)
+
 ```
 
 
@@ -55,8 +55,62 @@ ggsave("plot_temp.pdf")
 
 ```
 
-Description of the patterns in this plot: As the hours and days increase, the temperature seems to have an overall increase in temperature. The temperature also fluctuates up and down as the time increases. The humidity is between between 30 and 80 for most hours. The humidity seems to be really high (80 and up) the two or three days leading up to January 14. 
+Description of the patterns in this plot: As the hours and days increase, the temperature seems to have an overall increase in temperature. The temperature also fluctuates up and down as the time increases. The humidity is between between 30 and 80 for most hours. The humidity seems to be really high (80 and up) the two or three days leading up to around January 14. 
 
 
+## Problem 2
+
+```{r}
+# create a dataframe
+df = 
+  tibble(
+    samp_numeric = rnorm(10),
+    greater_0 = samp_numeric > 0,
+    vec_char = c("This", "is", "a", "character", "vector", "with", "random", "words", "in", "it"),
+    vec_factor = factor(c("high", "moderate", "low", "high", "moderate", "low", "high", "moderate", "low", "high"))
+  )
+
+```
+
+```{r}
+# find the mean of the random sample
+mean_samp_numeric = df |>
+  pull(samp_numeric) |>
+  mean()
+mean_samp_numeric
+
+# find the mean of the logical vector
+mean_greater_0 = df |>
+  pull(greater_0) |>
+  mean()
+mean_greater_0
+
+# find the mean of the character vector
+mean_vec_char = df |>
+  pull(vec_char) |>
+  mean()
+mean_vec_char
+
+# find the mean of the factor vector
+mean_vec_factor = df |>
+  pull(vec_factor) |>
+  mean()
+mean_vec_factor
+
+```
+
+Taking the mean of the random sample (numerical vector) and logical vector works. The mean of the random sample is `r mean_samp_numeric` and the mean of the logical vector is `r mean_greater_0`. Taking the mean of the character vector and factor factor does not work. 
+
+```{r message=FALSE}
+# Using as.numeric function on the logical, character, and factor variables
+as.numeric(df |> pull(greater_0))
+as.numeric(df |> pull(vec_char))
+as.numeric(df |> pull(vec_factor))
+
+```
+
+The logical and factor variables can be concerted into numerical values. Using as.numeric() on the logical variable replaces TRUE and FALSE with 1's and 0's. Using as.numeric() on the factor variable replaces the three factor levels with 1's, 2's, and 3's. But the character variable cannot be converted into numerical values and results in NA's when as.numeric() is applied it. 
+
+You can only take the mean of numerical and logical variables. It is possible to take the mean of a logical variable without using as.numeric() because TRUE and FALSE are coded as 1's and 0's. It is not possible to take the mean of a character variable with or without using as.numeric() because character variables cannot be converted to numerical values. It is only possible to take the mean of a factor variable after as.numeric() has been applied to it. 
 
 
