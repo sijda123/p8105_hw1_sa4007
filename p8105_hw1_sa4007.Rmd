@@ -99,7 +99,7 @@ mean_vec_factor
 
 ```
 
-Taking the mean of the random sample (numerical vector) and logical vector works. The mean of the random sample is `r mean_samp_numeric` and the mean of the logical vector is `r mean_greater_0`. Taking the mean of the character vector and factor factor does not work. 
+Taking the mean of the random sample (numerical vector) and logical vector works. The mean of the random sample is `r mean_samp_numeric` and the mean of the logical vector is `r mean_greater_0`. Taking the mean of the character vector and factor vector does not work. 
 
 ```{r echo=TRUE, warning=FALSE, message=FALSE, results='hide'}
 # Using as.numeric function on the logical, character, and factor variables
