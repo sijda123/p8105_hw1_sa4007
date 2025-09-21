@@ -1,15 +1,61 @@
 ---
-title: "P8105 HW1 (sa4007)"
-author: "Sijda Ahmed"
+title: "P8105 HW1"
+author: "Sijda Ahmed (sa4007)"
 date: "2025-09-18"
 output: github_document
 ---
 
+```{r}
+# load in necessary packages
+library(moderndive)
+library(tidyverse)
+library(nycflights13)
+library(ggplot2)
+```
 
 
+## Problem 1
 
+```{r}
+# load the early_january_weather dataset
+data("early_january_weather")
 
+# check the names of the variables
+head(early_january_weather)
+variables = names(early_january_weather)
+variables
 
+# check the size of the dataset
+num_row = nrow(early_january_weather)
+num_row
+num_col = ncol(early_january_weather)
+num_col
+
+# find the mean temperature
+mean_temp = mean(early_january_weather$temp)
+mean_temp
+
+```
+
+Description of the dataset: The names of the variables in this dataset are `r variables`. The variable origin is the weather station. The variables year, month, day, and hour correspond to the time of recording. The variables temp and dewp correspond to the temperature and dewpoint in F. The variable humid is the relative humidity. The variables wind_dir, wind_speed, and wind_gust correspond to the wind direction (in degrees), speed, and gust (in mph). The variable precip is the amount of precipitation in inches. The variable pressure is the sea lebel pressure in millibars. The variable visib is the visibility in miles. The variable time_hour is the date and hour of the recording in POSIXct. This dataset has `r num_row` rows and `r num_col` columns. The mean temperature is `r mean_temp` degrees Farenheit. 
+
+```{r}
+# create a scatterplot
+ggplot(early_january_weather, 
+       aes(x = time_hour, 
+           y = temp, 
+           color = humid)) + 
+  ggtitle("Temperature and Humidity Throughout Time") +
+  xlab("Time/Hour") +
+  ylab("Temperature") +
+  geom_point()
+
+# save the scattterplot to my project directory
+ggsave("plot_temp.pdf")
+
+```
+
+Description of the patterns in this plot: As the hours and days increase, the temperature seems to have an overall increase in temperature. The temperature also fluctuates up and down as the time increases. The humidity is between between 30 and 80 for most hours. The humidity seems to be really high (80 and up) the two or three days leading up to January 14. 
 
 
 
